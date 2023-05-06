@@ -1,36 +1,38 @@
 const arrowPrev = document.querySelector('.slider__arrow_prev');
 const arrowNext = document.querySelector('.slider__arrow_next');
-const sliderList = document.querySelectorAll('.slider__item');
-const dotList = document.querySelectorAll('.slider__dot');
+const sliderList = Array.from(document.querySelectorAll('.slider__item'));
+const dotList = Array.from(document.querySelectorAll('.slider__dot'));
 
-let sliderItemActive = 0;
-
-function changeActiveSlide() {
+function changeActiveSlide(activeIndex) {
   sliderList.forEach((sliderItem, index) => {
     sliderItem.classList.remove('slider__item_active');
-    if (index === sliderItemActive) {
+    if (index === activeIndex) {
       sliderItem.classList.add('slider__item_active');
     }
   });
 }
 
-function changeActiveDote() {
+function changeActiveDote(activeIndex) {
   dotList.forEach((dotItem, index) => {
     dotItem.classList.remove('slider__dot_active');
-    if (index === sliderItemActive) {
+    if (index === activeIndex) {
       dotItem.classList.add('slider__dot_active');
     }
   });
 }
 
-sliderList.forEach((sliderItem, index) => {
-  if (sliderItem.classList.contains('slider__item_active')) {
-    sliderItemActive = index;
-  }
-});
+function findActiveIndex() {
+  const searchIndex = sliderList.findIndex((sliderItem) => {
+    return sliderItem.classList.contains('slider__item_active');
+  });
+
+  return searchIndex;
+}
 
 dotList.forEach((dotItem, index) => {
-  if (index === sliderItemActive) {
+  let sliderItemActiveIndex = findActiveIndex();
+
+  if (index === sliderItemActiveIndex) {
     dotItem.classList.add('slider__dot_active');
   }
 
@@ -41,23 +43,28 @@ dotList.forEach((dotItem, index) => {
     event.target.classList.add('slider__dot_active');
     dotList.forEach((dotItem, index) => {
       if (dotItem.classList.contains('slider__dot_active')) {
-        sliderItemActive = index;
-        changeActiveSlide();
+        changeActiveSlide(index);
       }
     });
   });
 });
 
 arrowNext.addEventListener('click', () => {
-  sliderItemActive =
-    sliderItemActive === sliderList.length - 1 ? 0 : sliderItemActive + 1;
-  changeActiveSlide();
-  changeActiveDote();
+  let sliderItemActiveIndex = findActiveIndex();
+  sliderItemActiveIndex =
+    sliderItemActiveIndex === sliderList.length - 1
+      ? 0
+      : sliderItemActiveIndex + 1;
+  changeActiveSlide(sliderItemActiveIndex);
+  changeActiveDote(sliderItemActiveIndex);
 });
 
 arrowPrev.addEventListener('click', () => {
-  sliderItemActive =
-    sliderItemActive === 0 ? sliderList.length - 1 : sliderItemActive - 1;
-  changeActiveSlide();
-  changeActiveDote();
+  let sliderItemActiveIndex = findActiveIndex();
+  sliderItemActiveIndex =
+    sliderItemActiveIndex === 0
+      ? sliderList.length - 1
+      : sliderItemActiveIndex - 1;
+  changeActiveSlide(sliderItemActiveIndex);
+  changeActiveDote(sliderItemActiveIndex);
 });
