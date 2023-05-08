@@ -4,6 +4,7 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timerElement = container.querySelector('.status__timer');
 
     this.reset();
 
@@ -17,18 +18,27 @@ class Game {
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
+    document.addEventListener('keypress', (event) => {
+      const enteredSymbol = event.key.toLowerCase();
+      const currentSymbol = this.currentSymbol.textContent.toLowerCase();
+      if (enteredSymbol === currentSymbol) {
+        this.success();
+      } else {
+        this.fail();
+      }
+    });
   }
 
+  // countTime = () => {
+  //   this.timerElement.textContent--;
+  //   if (this.timerElement.textContent == 0) {
+  //     this.fail();
+  //   }
+  // }
+
   success() {
-    if(this.currentSymbol.classList.contains("symbol_current")) this.currentSymbol.classList.remove("symbol_current");
+    if (this.currentSymbol.classList.contains('symbol_current'))
+      this.currentSymbol.classList.remove('symbol_current');
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
 
@@ -56,6 +66,9 @@ class Game {
     const word = this.getWord();
 
     this.renderWord(word);
+
+    this.timerElement.textContent = word.length;
+    setInterval(this.countTime, 1000);
   }
 
   getWord() {
@@ -70,7 +83,7 @@ class Game {
         'popcorn',
         'cinema',
         'love',
-        'javascript'
+        'javascript',
       ],
       index = Math.floor(Math.random() * words.length);
 
@@ -81,7 +94,7 @@ class Game {
     const html = [...word]
       .map(
         (s, i) =>
-          `<span class="symbol ${i === 0 ? 'symbol_current': ''}">${s}</span>`
+          `<span class="symbol ${i === 0 ? 'symbol_current' : ''}">${s}</span>`
       )
       .join('');
     this.wordElement.innerHTML = html;
@@ -90,5 +103,4 @@ class Game {
   }
 }
 
-new Game(document.getElementById('game'))
-
+new Game(document.getElementById('game'));
