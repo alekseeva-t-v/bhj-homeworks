@@ -29,12 +29,12 @@ class Game {
     });
   }
 
-  // countTime = () => {
-  //   this.timerElement.textContent--;
-  //   if (this.timerElement.textContent == 0) {
-  //     this.fail();
-  //   }
-  // }
+  countTime = () => {
+    this.timerElement.textContent--;
+    if (Number(this.timerElement.textContent) === 0) {
+      this.fail();
+    }
+  };
 
   success() {
     if (this.currentSymbol.classList.contains('symbol_current'))
@@ -68,22 +68,25 @@ class Game {
     this.renderWord(word);
 
     this.timerElement.textContent = word.length;
-    setInterval(this.countTime, 1000);
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+    this.intervalId = setInterval(this.countTime, 1000);
   }
 
   getWord() {
     const words = [
-        'bob',
-        'awesome',
-        'netology',
-        'hello',
-        'kitty',
-        'rock',
-        'youtube',
-        'popcorn',
-        'cinema',
-        'love',
-        'javascript',
+        'All we need это любовь',
+        'Делай что-то со страстью или not it all',
+        'Everything you can imagine реально',
+        'Любовь is friendship set on fire',
+        'Follow your сердцем',
+        'Where there is love there is жизнь',
+        'Пока дышу, I love and believe',
+        'Do not squander time, из него состоит жизнь',
+        'Успех сам не приходит, если you go to it',
+        'Happiness is not a destination. It is a method of life.',
+        'Все, что вы можете представить is real',
       ],
       index = Math.floor(Math.random() * words.length);
 
