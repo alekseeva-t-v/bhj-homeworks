@@ -1,37 +1,31 @@
-const rotatorCaseList = document.querySelectorAll('.rotator__case');
+const rotatorsList = document.querySelectorAll('.rotator');
 
-rotatorCaseList.forEach((rotatorCaseItem) => {
-  const rotator = rotatorCaseItem.closest('.rotator');
-  const rotatorCaseCarrentList = Array.from(
-    rotator.querySelectorAll('.rotator__case')
-  );
-  let activeElementIndex = rotatorCaseCarrentList.findIndex((element) => {
-    return element.classList.contains('rotator__case_active');
-  });
+rotatorsList.forEach((rotator) => {
+  const childrenItemsRotator = Array.from(rotator.children);
 
-  let colorActiveElement =
-    rotatorCaseCarrentList[activeElementIndex].dataset.color;
+  let activeElem = 1;
+  let speedChangeElem = childrenItemsRotator[0].getAttribute('data-speed');
 
-  setInterval(() => {
-    rotatorCaseCarrentList.forEach((rotatorCaseItem) => {
-      rotatorCaseItem.classList.remove('rotator__case_active');
+  function changeElem() {
+    childrenItemsRotator.forEach((childrenItem) => {
+      childrenItem.classList.remove('rotator__case_active');
     });
 
-    activeElementIndex =
-      activeElementIndex === rotatorCaseCarrentList.length - 1
-        ? 0
-        : activeElementIndex + 1;
+    childrenItemsRotator[activeElem].classList.add('rotator__case_active');
 
-    rotatorCaseCarrentList[activeElementIndex].classList.add(
-      'rotator__case_active'
-    );
+    let colorActiveElem =
+      childrenItemsRotator[activeElem].getAttribute('data-color');
 
-    colorActiveElement =
-      rotatorCaseCarrentList[activeElementIndex].dataset.color;
+    childrenItemsRotator[activeElem].style.color = `${colorActiveElem}`;
 
-    speedActiveElement =
-      rotatorCaseCarrentList[activeElementIndex].dataset.speed;
+    speedChangeElem = childrenItemsRotator[activeElem].getAttribute('data-speed');
 
-    rotatorCaseCarrentList[activeElementIndex].style.color = colorActiveElement;
-  }, 1000);
+    if (activeElem < childrenItemsRotator.length - 1) {
+      activeElem++;
+    } else {
+      activeElem = 0;
+    }
+    setTimeout(changeElem, `${speedChangeElem}`);
+  }
+  setTimeout(changeElem, `${speedChangeElem}`);
 });
