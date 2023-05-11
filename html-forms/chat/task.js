@@ -63,7 +63,7 @@ chatWidget.addEventListener('click', () => {
 });
 
 document.addEventListener('keyup', (event) => {
-  if (event.code === 'Enter' && chatWidgetInput.value) {
+  if (event.key === 'Enter' && chatWidgetInput.value.trim()) {
     messages.innerHTML += `
   <div class="message message_client">
     <div class="message__time">${showTime()}</div>
