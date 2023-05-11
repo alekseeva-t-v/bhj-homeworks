@@ -1,5 +1,7 @@
 const chatWidget = document.querySelector('.chat-widget');
-const chatWidgetContainer = document.querySelector('.chat-widget__messages-container')
+const chatWidgetContainer = document.querySelector(
+  '.chat-widget__messages-container'
+);
 const messages = document.querySelector('.chat-widget__messages');
 const chatWidgetInput = document.querySelector('.chat-widget__input');
 
@@ -31,13 +33,11 @@ function showTime() {
 }
 
 function inactivityTime() {
-  console.log('inactivityTime')
   let time = setTimeout(logout, 30000);
   window.onload = resetTimer;
   document.onkeydown = resetTimer;
 
   function logout() {
-    console.log('logout')
     messages.innerHTML += `
     <div class="message">
       <div class="message__time">${showTime()}</div>
@@ -45,19 +45,21 @@ function inactivityTime() {
         Вы ещё здесь?
       </div>
     </div>
-  `
-  chatWidgetContainer.scrollTop = chatWidgetContainer.scrollHeight;
+  `;
+    chatWidgetContainer.scrollTop = chatWidgetContainer.scrollHeight;
   }
 
   function resetTimer() {
-      clearTimeout(time);
-      time = setTimeout(logout, 30000)
+    clearTimeout(time);
+    time = setTimeout(logout, 30000);
   }
-};
+}
 
 chatWidget.addEventListener('click', () => {
+  if (!chatWidget.classList.contains('chat-widget_active')) {
+    inactivityTime();
+  }
   chatWidget.classList.add('chat-widget_active');
-  inactivityTime();
 });
 
 document.addEventListener('keyup', (event) => {
@@ -85,5 +87,3 @@ document.addEventListener('keyup', (event) => {
     chatWidgetContainer.scrollTop = chatWidgetContainer.scrollHeight;
   }
 });
-
-
