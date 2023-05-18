@@ -9,3 +9,48 @@ body {
 .poll__title {
   margin-bottom: 20px;
 }
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 9px 9px 9px 9px;
+  color: #18011f;
+  transform: translate(-50%, -50%) scale(0);
+  background: #fafafa;
+  transition: 0.5s all;
+}
+
+.modal_active {
+  transform: translate(-50%, -50%) scale(1);
+  transition: 0.5s all;
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  background-color: rgba(41, 41, 41, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s all;
+}
+
+.overlay_active {
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.5s all;
+}
+
+.modal__content {
+  padding: 20px;
+  border-bottom: solid 2px #808080;
+}
+
+.modal__close {
+  padding: 20px;
+  text-align: right;
+  color: #2d13d6;
+  cursor: pointer;
+}
