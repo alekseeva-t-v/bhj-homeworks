@@ -1,6 +1,10 @@
 const timer = document.getElementById('timer');
 let remainingTime = timer.textContent;
 
+/**
+ * Преобразует оставшееся время в необходимый формат. Добавляет полученное значение в текстовое содержимое элемента
+ *
+ */
 function showConvertedTime() {
   const hoursLeft = Math.floor(remainingTime / 60 / 60);
   const hoursLeftText = hoursLeft < 10 ? '0' + hoursLeft : hoursLeft;
@@ -11,9 +15,11 @@ function showConvertedTime() {
   timer.textContent = `${hoursLeftText}:${minutesLeftText}:${secondsLeftText}`;
 }
 
-showConvertedTime();
-
-let timerId = setInterval(() => {
+/**
+ * Уменьшает заданное время на одну секунду, преобразует его в необходимый формат с помощью функции showConvertedTime, если время не закончилось. Выводит сообщение о победе и запускает загрузку файла, если время закончилось
+ *
+ */
+function createCountdown () {
   if (remainingTime === 0) {
     alert('Вы победили в конкурсе!');
     location = './sertificate.ai';
@@ -22,4 +28,8 @@ let timerId = setInterval(() => {
     remainingTime = remainingTime - 1;
     showConvertedTime();
   }
-}, 1000);
+}
+
+showConvertedTime();
+
+let timerId = setInterval(createCountdown, 1000);
