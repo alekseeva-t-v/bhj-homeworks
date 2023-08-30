@@ -47,6 +47,6 @@
 ![JS](./js.svg)
 ![GIT](./git.svg)
 
-## **[Демо](https://alekseeva-t-v.github.io/bhj-homeworks/element-seach/popups/task)**
+## **[Демо](https://alekseeva-t-v.github.io/bhj-homeworks/element-search/popups/task)**
 
 ![Демо](./demo.jpg)
