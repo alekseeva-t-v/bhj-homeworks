@@ -47,6 +47,5 @@
 ![JS](./js.svg)
 ![GIT](./git.svg)
 
-## **[Демо](https://alekseeva-t-v.github.io/bhj-homeworks/element-seach/popups/task)**
-
+## **[Демо](https://alekseeva-t-v.github.io/bhj-homeworks/js-features/cookie-clicker/task)**
 ![Демо](./demo.jpg)
