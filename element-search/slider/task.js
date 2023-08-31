@@ -3,6 +3,11 @@ const arrowNext = document.querySelector('.slider__arrow_next');
 const sliderList = Array.from(document.querySelectorAll('.slider__item'));
 const dotList = Array.from(document.querySelectorAll('.slider__dot'));
 
+/**
+ * Отображает только активный слайд, скрывая остальные
+ *
+ * @param {number} activeIndex Индекс активного слайдао.
+ */
 function changeActiveSlide(activeIndex) {
   sliderList.forEach((sliderItem, index) => {
     sliderItem.classList.remove('slider__item_active');
@@ -12,6 +17,11 @@ function changeActiveSlide(activeIndex) {
   });
 }
 
+/**
+ * Выделяет точку активного слайда
+ *
+ * @param {number} activeIndex Индекс активного слайдао.
+ */
 function changeActiveDote(activeIndex) {
   dotList.forEach((dotItem, index) => {
     dotItem.classList.remove('slider__dot_active');
@@ -21,6 +31,11 @@ function changeActiveDote(activeIndex) {
   });
 }
 
+/**
+ * Находит и возвращает индекс активного элемента.
+ *
+ * @return {number} Индекс активного слайдао.
+ */
 function findActiveIndex() {
   const searchIndex = sliderList.findIndex((sliderItem) => {
     return sliderItem.classList.contains('slider__item_active');
