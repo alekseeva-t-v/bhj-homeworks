@@ -1,4 +1,5 @@
 const revealList = document.querySelectorAll('.reveal');
+
 window.addEventListener('scroll', () => {
   revealList.forEach((revealElem) => {
     const { top, bottom } = revealElem.getBoundingClientRect();

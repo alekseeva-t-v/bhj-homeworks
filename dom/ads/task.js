@@ -6,6 +6,10 @@ rotatorsList.forEach((rotator) => {
   let activeElem = 1;
   let speedChangeElem = childrenItemsRotator[0].getAttribute('data-speed');
 
+  /**
+   * Поочередно меняет активные элементы. (1) Удаляет активный класс со всех элементов. Добавляет активный класс элементу с соответствующим индексом (2) Меняет цвет активного элемента и добавляет датаатрибут (3) Переходит к следующему элементу или к первому элементу
+   *
+   */
   function changeElem() {
     childrenItemsRotator.forEach((childrenItem) => {
       childrenItem.classList.remove('rotator__case_active');
@@ -18,7 +22,8 @@ rotatorsList.forEach((rotator) => {
 
     childrenItemsRotator[activeElem].style.color = `${colorActiveElem}`;
 
-    speedChangeElem = childrenItemsRotator[activeElem].getAttribute('data-speed');
+    speedChangeElem =
+      childrenItemsRotator[activeElem].getAttribute('data-speed');
 
     if (activeElem < childrenItemsRotator.length - 1) {
       activeElem++;
@@ -27,5 +32,6 @@ rotatorsList.forEach((rotator) => {
     }
     setTimeout(changeElem, `${speedChangeElem}`);
   }
+
   setTimeout(changeElem, `${speedChangeElem}`);
 });
