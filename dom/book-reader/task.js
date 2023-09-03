@@ -5,12 +5,22 @@ const colorButtonsList = bookControlColor.querySelectorAll('.color');
 const bookControlBackground = book.querySelector('.book__control_background')
 const backgroundColorButtonsList = bookControlBackground.querySelectorAll('.color');
 
+/**
+ * Удаляет класс у основного элемента
+ *
+ * @param {string} className Класс, который необходимо удалить
+ */
 function removeClass(className) {
   if (book.classList.contains(className)) {
     book.classList.remove(className);
   }
 }
 
+/**
+ * Добавляет класс основному элементу
+ *
+ * @param {string} className Класс, который необходимо добавить
+ */
 function addClass(className) {
   book.classList.add(className);
 }
