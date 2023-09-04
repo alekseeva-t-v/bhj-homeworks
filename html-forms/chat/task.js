@@ -5,6 +5,11 @@ const chatWidgetContainer = document.querySelector(
 const messages = document.querySelector('.chat-widget__messages');
 const chatWidgetInput = document.querySelector('.chat-widget__input');
 
+/**
+ * Возвращает случайную фразу из массива.
+ *
+ * @return {string} выбранная из массива фраза
+ */
 function getAnswers() {
   const robotAnswers = [
       'Кто тут?',
@@ -19,24 +24,39 @@ function getAnswers() {
   return robotAnswers[index];
 }
 
+/**
+ * Возвращает преобразованное в необходимый формат число.
+ *
+ * @param {number} num исходное число, которое необходимо преобразовать
+ * @return {string} число в необходимом формате
+ */
 function addZero(num) {
-  if (num >= 0 && num <= 9) {
-    return '0' + num;
-  } else {
-    return num;
-  }
+  return num >= 0 && num <= 9 ? '0' + num : num;
 }
 
+/**
+ * Возвращает время в установленном формате
+ *
+ * @return {string} время
+ */
 function showTime() {
   let date = new Date();
   return `${addZero(date.getHours())}:${addZero(date.getMinutes())}`;
 }
 
+/**
+ * Отслеживает время отсутствия активности (1) Формирует переменную с счетчиком времени (2) Устанавливает сброс счетчика при перезагрузке страницы или наступлении события ввода
+ *
+ */
 function inactivityTime() {
   let time = setTimeout(logout, 30000);
   window.onload = resetTimer;
   document.onkeydown = resetTimer;
 
+  /**
+   * Выводит сообщение об отсутствии активности
+   *
+   */
   function logout() {
     messages.innerHTML += `
     <div class="message">
@@ -49,6 +69,10 @@ function inactivityTime() {
     chatWidgetContainer.scrollTop = chatWidgetContainer.scrollHeight;
   }
 
+  /**
+   * Сбрасывает таймер и устанавливет его снова
+   *
+   */
   function resetTimer() {
     clearTimeout(time);
     time = setTimeout(logout, 30000);
