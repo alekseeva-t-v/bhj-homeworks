@@ -10,6 +10,7 @@ class Autocomplete {
     this.registerEvents();
   }
 
+  
   registerEvents() {
     this.valueContainer.addEventListener('click', (e) => {
       this.searchInput.classList.add('autocomplete__search_active');
