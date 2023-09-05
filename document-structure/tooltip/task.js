@@ -1,6 +1,11 @@
 const elementsHasTooltipList = document.querySelectorAll('.has-tooltip');
 const body = document.getElementsByTagName('body')[0];
 
+/**
+ * Формирует разметку подсказки
+ *
+ * @param {object} element элемент для которого формируется подсказка.
+ */
 function createTooltip(element) {
   const { left, bottom } = element.getBoundingClientRect();
   const leftPosition = Math.ceil(left);
