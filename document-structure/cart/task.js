@@ -16,16 +16,29 @@ let cartArr;
 
 showCart();
 
+/**
+ * Возвращает элемент в котором произошло изменение количества товаров и количество добавленных товаров на предыдущем шаге
+ *
+ * @param {object} elem дочерний элемент в котором произошло действие
+ * @return {object} Созданный элемент.
+ */
 function findCurrentAmount(elem) {
   const currentProductQuantity = elem.closest('.product__quantity');
   const currentProductQuantityValue = currentProductQuantity.querySelector(
     '.product__quantity-value'
   );
   let currentValue = Number(currentProductQuantityValue.textContent);
-
   return [currentValue, currentProductQuantityValue];
 }
 
+/**
+ * Создает и возвращает элемент согласно заданным параметрам.
+ *
+ * @param {string} tag Тег формируемого элемента
+ * @param {string} className Название класса элемента.
+ * @param {object} parentElement Родительский элемент.
+ * @return {object} Созданный элемент.
+ */
 function createNewElement(tag, className, parentElement) {
   const element = document.createElement(tag);
   element.className = className;
@@ -34,6 +47,14 @@ function createNewElement(tag, className, parentElement) {
   return element;
 }
 
+/**
+ * Создает и возвращает карточку продукта, которая выводится в корзине.
+ *
+ * @param {string} id идентификатор продукта
+ * @param {string} img адрес изображения.
+ * @param {number} count Количество товаров.
+ * @return {object} Созданная карточка.
+ */
 function createProductElement(id, img, count) {
   const cartProduct = createNewElement('div', 'cart__product', cartProducts);
   cartProduct.dataset.id = id;
@@ -71,6 +92,12 @@ function createProductElement(id, img, count) {
   return cartProduct;
 }
 
+/**
+ * Обновляет созданную ранее карточку.
+ *
+ * @param {string} id идентификатор продукта
+ * @param {number} newCount новое количество элементов.
+ */
 function updateProductElement(id, newCount) {
   const currentProduct = cartProducts.querySelector(`[data-id="${id}"]`);
   const currentProductCount = currentProduct.querySelector(
@@ -80,6 +107,10 @@ function updateProductElement(id, newCount) {
     Number(currentProductCount.textContent) + Number(newCount);
 }
 
+/**
+ * Отображает данные корзины, если она не пуста
+ *
+ */
 function showCart() {
   if (!cartArr.length) {
     cart.classList.add('opacity');
@@ -88,6 +119,13 @@ function showCart() {
   }
 }
 
+/**
+ * Отвечает за плавное перемещение товара в корзину
+ *
+ * @param {object} img элемент изображения в списке
+ * @param {object} imgCart элемент изображения в корзине
+ * @param {boolean} isFirst показывает впервые ли добавляется конкретный элемент
+ */
 function moveToCart(img, imgCart, isFirst) {
   let imgPos = img.getBoundingClientRect();
   let imgCartPos = imgCart.getBoundingClientRect();
@@ -114,10 +152,18 @@ function moveToCart(img, imgCart, isFirst) {
   setTimeout(() => document.body.removeChild(imgClone), 1000);
 }
 
+/**
+ * Обновляет локальное хранилище данных
+ *
+ */
 function updateLocal() {
   localStorage.setItem('cart', JSON.stringify(cartArr));
 }
 
+/**
+ * Отображает список элементов в корзине
+ *
+ */
 function fillHtmlList() {
   if (cartArr.length > 0) {
     cartArr.forEach((item) => {
