@@ -1,3 +1,8 @@
+/**
+ * Формирует разметку списка валют, убирает прелоадер.
+ *
+ * @param {object} dataJSON данные полученные от сервера с информацией о влютах
+ */
 function createValuteList(dataJSON) {
   let data = JSON.parse(dataJSON);
   let valuteList = data['response']['Valute'];
