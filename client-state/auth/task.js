@@ -7,6 +7,12 @@ const overlay = document.querySelector('.overlay');
 const modal = document.querySelector('.modal');
 const modalClose = document.querySelector('.modal__close');
 
+/**
+ * Отображает панель для авторизированного пользователя
+ *
+ * @param {string} id Идентификатор пользователя.
+ *
+ */
 function openAuthorizedUserWindow(id) {
   userId.textContent = id;
   welcome.classList.add('welcome_active');
