@@ -103,6 +103,6 @@
 ![JS](./js.svg)
 ![GIT](./git.svg)
 
-## **[Демо](https://alekseeva-t-v.github.io/bhj-homeworks/client-state/text-editor/task)**
+## **[Демо](https://alekseeva-t-v.github.io/bhj-homeworks/client-state/auth/task)**
 
 ![Демо](./demo.jpg)
